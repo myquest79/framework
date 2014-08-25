@@ -19,7 +19,7 @@
   <!-- ContextLoaderListener for loading services configuration files -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/hello-service.xml</param-value>
+    <param-value>/WEB-INF/helloworld-service.xml</param-value>
   </context-param>
 
   <listener>

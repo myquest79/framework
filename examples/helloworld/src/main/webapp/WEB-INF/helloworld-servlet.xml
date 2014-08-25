@@ -6,71 +6,17 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
   
-  <context:component-scan base-package="com.apress.springrecipes.court.web" />
-  
-  <!-- Resolver for views -->
-  <bean class="org.springframework.web.servlet.view.XmlViewResolver">
-    <property name="location">
-      <value>/WEB-INF/court-views.xml</value>
-    </property>
-    <property name="order" value="0" />
-  </bean>
-  <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-    <property name="basename" value="views" />
-    <property name="order" value="1" />
-  </bean>
+  <context:component-scan base-package="com.myquest.api.examples.helloworld.web" />
+	
+  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />    
+
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <!-- InternalResourceViewResolver resolves view names into view objects of type JstlView if the JSTL library (ie jstl.jar) is present in the classpath.
+  <!-- InternalResourceViewResolver resolves view names into view objects of type JstlView if the JSTL library (ie jstl.jar) is present in the classpath.
        So you can omit the viewClass property if your views are JSP templates with JSTL tags. -->
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
     <property name="prefix" value="/WEB-INF/jsp/" />
     <property name="suffix" value=".jsp" />
-    <property name="order" value="2" />
-  </bean>
-  
-  <!-- Resolver for locales -->
-  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-    <property name="defaultLocale" value="en" />
-  </bean>
-  <!-- 
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" >
-      <property name="cookieName" value="language" />
-      <property name="cookieMaxAge" value="3600" />
-      <property name="defaultLocale" value="en" />
-    </bean>
-  -->
-  
-  <!-- Locale and Measurement Interceptors -->
-  <bean id="measurementInterceptor" class="com.apress.springrecipes.court.web.MeasurementInterceptor" />
-  <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-    <property name="paramName" value="language" />
-  </bean>
-  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
-    <property name="interceptors">
-      <list>
-        <ref bean="measurementInterceptor" />
-        <ref bean="localeChangeInterceptor" />
-      </list>
-    </property>
-  </bean>
-  
-  <!-- Handler for annotations -->
-  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-  
-  <!-- Properties for locale-sensitive text messages -->
-  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basename" value="messages" />
-  </bean>
-  
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-      <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-      <property name="url" value="jdbc:mysql://localhost:3306/vehicles" />
-      <property name="username" value="root" />
-      <property name="password" value="root" />
-  </bean>
-  
-  <bean id="vehicleDao" class="com.apress.springrecipes.court.dao.impl.JdbcVehicleDao">
-    <property name="dataSource" ref="dataSource" />
   </bean>
 
 </beans>
